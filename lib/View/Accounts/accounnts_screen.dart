@@ -6,6 +6,7 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:intl/intl.dart';
 import 'package:pak_pharma/Controllers/account_controller.dart';
 import 'package:pak_pharma/Controllers/balance_controller.dart';
+import 'package:pak_pharma/View/Accounts/receivable_screen.dart';
 import 'package:pak_pharma/View/header.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -110,29 +111,34 @@ class AccountScreen extends StatelessWidget {
                  crossAxisCount: 2,
                  childAspectRatio: 1.6,
                  children: <Widget>[
-                   Container(
-                     height:50,
-                     width: MediaQuery.of(context).size.width * 0.40,
-                     decoration: BoxDecoration(
-                       color: Color(0xffffd045),
-                       borderRadius: BorderRadius.circular(10),
-                       boxShadow: [
-                         BoxShadow(
-                           color: Colors.grey.withOpacity(0.5),
-                           spreadRadius: 5,
-                           blurRadius: 7,
-                           offset: Offset(0, 3), // changes position of shadow
-                         ),
-                       ],
+                   InkWell(
+                     onTap: (){
+                       Get.to(ReceivableScreen());
+                     },
+                     child: Container(
+                       height:50,
+                       width: MediaQuery.of(context).size.width * 0.40,
+                       decoration: BoxDecoration(
+                         color: Color(0xffffd045),
+                         borderRadius: BorderRadius.circular(10),
+                         boxShadow: [
+                           BoxShadow(
+                             color: Colors.grey.withOpacity(0.5),
+                             spreadRadius: 5,
+                             blurRadius: 7,
+                             offset: Offset(0, 3), // changes position of shadow
+                           ),
+                         ],
+                       ),
+                       child: Center(child: Column(
+                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                         children: [
+                           Image.asset("assets/images/receivable.png",height: 50,),
+                           Text('Receivable',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),),
+                           Text(formatter.format(balanceController.summary?.receivable??0),),
+                         ],
+                       )),
                      ),
-                     child: Center(child: Column(
-                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                       children: [
-                         Image.asset("assets/images/receivable.png",height: 50,),
-                         Text('Receivable',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),),
-                         Text(formatter.format(balanceController.summary?.receivable??0),),
-                       ],
-                     )),
                    ),
                    Container(
                      height:50,
